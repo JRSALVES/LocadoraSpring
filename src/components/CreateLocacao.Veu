@@ -1,0 +1,108 @@
+<template>
+  <div>
+    <h1>Criar Nova Locação</h1>
+    <form @submit.prevent="createLocacao">
+      <label for="cliente">Cliente:</label>
+      <select v-model="locacao.clienteId">
+        <option v-for="cliente in clientes" :key="cliente.id" :value="cliente.id">
+          {{ cliente.nome }}
+        </option>
+      </select>
+
+      <label for="carro">Carro:</label>
+      <select v-model="locacao.carroId">
+        <option v-for="carro in carros" :key="carro.id" :value="carro.id">
+          {{ carro.modelo }} - {{ carro.fabricante }}
+        </option>
+      </select>
+
+      <label for="dataLocacao">Data de Locação:</label>
+      <input type="date" v-model="locacao.dataLocacao" />
+
+      <label for="dataDevolucao">Data de Devolução:</label>
+      <input type="date" v-model="locacao.dataDevolucao" />
+
+      <label for="valorDesconto">Valor Desconto:</label>
+      <input type="number" v-model="locacao.valorDesconto" />
+
+      <label for="valor">Valor:</label>
+      <input type="number" v-model="locacao.valor" />
+
+      <label for="valorTotal">Valor Total:</label>
+      <input type="number" v-model="locacao.valorTotal" />
+
+      <button type="submit">Criar Locação</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      clientes: [],
+      carros: [],
+      locacao: {
+        clienteId: '',
+        carroId: '',
+        dataLocacao: '',
+        dataDevolucao: '',
+        valorDesconto: 0,
+        valor: 0,
+        valorTotal: 0
+      }
+    };
+  },
+  created() {
+    this.fetchClientes();
+    this.fetchCarros();
+  },
+  methods: {
+    fetchClientes() {
+      axios.get('/api/clientes')
+        .then(response => {
+          this.clientes = response.data;
+        })
+        .catch(error => {
+          console.error("There was an error fetching the clientes!", error);
+        });
+    },
+    fetchCarros() {
+      axios.get('/api/carros')
+        .then(response => {
+          this.carros = response.data;
+        })
+        .catch(error => {
+          console.error("There was an error fetching the carros!", error);
+        });
+    },
+    createLocacao() {
+      axios.post('/api/locacoes', this.locacao)
+        .then(response => {
+          alert("Locação criada com sucesso!");
+          this.resetForm();
+        })
+        .catch(error => {
+          console.error("There was an error creating the locação!", error);
+        });
+    },
+    resetForm() {
+      this.locacao = {
+        clienteId: '',
+        carroId: '',
+        dataLocacao: '',
+        dataDevolucao: '',
+        valorDesconto: 0,
+        valor: 0,
+        valorTotal: 0
+      };
+    }
+  }
+};
+</script>
+
+<style scoped>
+/* Add your styles here */
+</style>
