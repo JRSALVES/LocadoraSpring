@@ -1,8 +1,8 @@
 package com.jrs.LocadoraSpring.service;
 
-import com.jrs.LocadoraSpring.entity.Modelo;
-import com.jrs.LocadoraSpring.repository.ModeloRepository;
+import com.jrs.LocadoraSpring.entity.dto.ModeloDTO;
 import com.jrs.LocadoraSpring.repository.ModeloRepositoryCustom;
+import com.jrs.LocadoraSpring.repository.crudrepository.ModeloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +17,15 @@ public class ModeloService {
     @Autowired
     ModeloRepositoryCustom repositoryJdbcClient;
 
-    public List<Modelo> findAllModelos(){
+    public List<ModeloDTO> findAllModelos(){
         return repositoryJdbcClient.findAllModelos();
     }
 
-    public Modelo findModeloById(Long id){
+    public ModeloDTO findModeloById(Long id){
         return repositoryJdbcClient.findModeloById(id);
     }
 
-    public void createModelo(Modelo modelo){
+    public void createModelo(ModeloDTO modelo){
         repositoryJdbcClient.create(modelo);
     }
 
@@ -38,7 +38,7 @@ public class ModeloService {
         }
     }
 
-    public boolean updateModelo(Modelo modelo){
+    public boolean updateModelo(ModeloDTO modelo){
         try{
             repositoryJdbcClient.updateModelo(modelo);
             return true;

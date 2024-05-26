@@ -1,7 +1,7 @@
-package com.jrs.LocadoraSpring.repository;
+package com.jrs.LocadoraSpring.repository.crudrepository;
 
-import com.jrs.LocadoraSpring.entity.Cliente;
-import com.jrs.LocadoraSpring.entity.Modelo;
+
+import com.jrs.LocadoraSpring.entity.Fabricante;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -11,12 +11,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ClienteRepository extends CrudRepository<Cliente, Long> {
+public interface FabricanteRepository extends CrudRepository<Fabricante, Long> {
 
     @Override
-    List<Cliente> findAll();
+    List<Fabricante> findAll();
 
     @Modifying
-    @Query("DELETE FROM cliente WHERE id = :?")
+    @Query("DELETE FROM fabricante WHERE id = :?")
     public void deleteByID(@Param("?")Long id);
+
 }

@@ -1,6 +1,6 @@
 package com.jrs.LocadoraSpring.controller;
 
-import com.jrs.LocadoraSpring.entity.Modelo;
+import com.jrs.LocadoraSpring.entity.dto.ModeloDTO;
 import com.jrs.LocadoraSpring.service.ModeloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,14 +17,14 @@ public class ModeloController {
     ModeloService service;
 
     @GetMapping
-    public ResponseEntity<List<Modelo>> findAllModelos() {
-        List<Modelo> modelos = service.findAllModelos();
+    public ResponseEntity<List<ModeloDTO>> findAllModelos() {
+        List<ModeloDTO> modelos = service.findAllModelos();
         return new ResponseEntity<>(modelos, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> findModeloById(@PathVariable Long id) {
-        Modelo modelo = service.findModeloById(id);
+        ModeloDTO modelo = service.findModeloById(id);
         if (modelo != null) {
             return ResponseEntity.ok(modelo);
         } else {
@@ -33,7 +33,7 @@ public class ModeloController {
     }
 
     @PostMapping
-    public ResponseEntity<String> saveModelo(@RequestBody Modelo modelo){
+    public ResponseEntity<String> saveModelo(@RequestBody ModeloDTO modelo){
         try{
             service.createModelo(modelo);
             return ResponseEntity.status(HttpStatus.CREATED).body("Modelo saved successfully");
@@ -53,7 +53,7 @@ public class ModeloController {
     }
 
     @PutMapping
-    public ResponseEntity<String> updateModelo(@RequestBody Modelo modelo) {
+    public ResponseEntity<String> updateModelo(@RequestBody ModeloDTO modelo) {
         boolean isUpdated = service.updateModelo(modelo);
         if (isUpdated) {
             return ResponseEntity.ok("Modelo updated successfully");

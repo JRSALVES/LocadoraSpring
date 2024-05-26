@@ -1,7 +1,7 @@
 package com.jrs.LocadoraSpring.service;
 
 import com.jrs.LocadoraSpring.entity.Cliente;
-import com.jrs.LocadoraSpring.repository.ClienteRepository;
+import com.jrs.LocadoraSpring.repository.crudrepository.ClienteRepository;
 import com.jrs.LocadoraSpring.repository.ClienteRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

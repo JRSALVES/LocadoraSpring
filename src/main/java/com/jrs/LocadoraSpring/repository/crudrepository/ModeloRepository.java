@@ -1,7 +1,6 @@
-package com.jrs.LocadoraSpring.repository;
+package com.jrs.LocadoraSpring.repository.crudrepository;
 
-import com.jrs.LocadoraSpring.entity.Fabricante;
-import com.jrs.LocadoraSpring.entity.Modelo;
+import com.jrs.LocadoraSpring.entity.ModeloDTO;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -11,10 +10,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ModeloRepository extends CrudRepository<Modelo, Long> {
+public interface ModeloRepository extends CrudRepository<ModeloDTO, Long> {
 
     @Override
-    List<Modelo> findAll();
+    List<ModeloDTO> findAll();
 
     @Modifying
     @Query("DELETE FROM modelo WHERE id = :?")

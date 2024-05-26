@@ -1,7 +1,7 @@
 package com.jrs.LocadoraSpring.service;
 
 import com.jrs.LocadoraSpring.entity.Fabricante;
-import com.jrs.LocadoraSpring.repository.FabricanteRepository;
+import com.jrs.LocadoraSpring.repository.crudrepository.FabricanteRepository;
 import com.jrs.LocadoraSpring.repository.FabricanteRepositoryCuston;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
